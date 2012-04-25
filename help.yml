@@ -1,0 +1,140 @@
+---
+! '#help':
+  :summary: ''
+  :format: ! "---------------------------------- Method: #help (Resque::Pool::Dynamic)\n
+    \                               (Defined in: lib/resque/pool/dynamic.rb)\n\n    dynamic.help(subject
+    = nil) \n------------------------------------------------------------------------\n\n
+    \   \n\n\n"
+! '#pid':
+  :summary: PID of the resque-pool process if running.
+  :format: ! "----------------------------------- Method: #pid (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.pid
+    (readonly)\n------------------------------------------------------------------------\n\n
+    \   PID of the resque-pool process if running \n\n\n\n"
+! '#config_path':
+  :summary: Path to the temporary config file.
+  :format: ! "--------------------------- Method: #config_path (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.config_path
+    \n------------------------------------------------------------------------\n\n
+    \   Path to the temporary config file \n\n\n\n"
+! '#initial_config':
+  :summary: Initial configuration.
+  :format: ! "------------------------ Method: #initial_config (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.initial_config(spec)
+    \n------------------------------------------------------------------------\n\n
+    \   Initial configuration \n\n\n\n"
+! '#config':
+  :summary: Show or update configuration.
+  :format: ! "-------------------------------- Method: #config (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.config(args
+    = nil) \n------------------------------------------------------------------------\n\n
+    \   Show or update configuration \n\n\n\n"
+! '#write_config':
+  :summary: Write temporary configuration file.
+  :format: ! "-------------------------- Method: #write_config (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.write_config
+    \n------------------------------------------------------------------------\n\n
+    \   Write temporary configuration file \n\n\n\n"
+! '#start!':
+  :summary: Start resque-pool child.
+  :format: ! "-------------------------------- Method: #start! (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.start!
+    \n------------------------------------------------------------------------\n\n
+    \   Start resque-pool child \n\n\n\n"
+! '#start':
+  :summary: Start resque-pool, showing startup logs.
+  :format: ! "--------------------------------- Method: #start (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.start
+    \n------------------------------------------------------------------------\n\n
+    \   Start resque-pool, showing startup logs \n\n\n\n"
+! '#kill!':
+  :summary: Send signal to a running resque-pool.
+  :format: ! "--------------------------------- Method: #kill! (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.kill!(sig)
+    \n------------------------------------------------------------------------\n\n
+    \   Send signal to a running resque-pool \n\n\n\n"
+! '#stop!':
+  :summary: Stop running resque-pool.
+  :format: ! "--------------------------------- Method: #stop! (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.stop!
+    \n------------------------------------------------------------------------\n\n
+    \   Stop running resque-pool \n\n\n\n"
+! '#stop':
+  :summary: Stop running resque-pool, show shutdown logs.
+  :format: ! "---------------------------------- Method: #stop (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.stop
+    \n------------------------------------------------------------------------\n\n
+    \   Stop running resque-pool, show shutdown logs \n\n\n\n"
+! '#reload':
+  :summary: Reload configuration.
+  :format: ! "-------------------------------- Method: #reload (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.reload
+    \n------------------------------------------------------------------------\n\n
+    \   Reload configuration \n\n\n\n"
+! '#pstree':
+  :summary: Show child process tree.
+  :format: ! "-------------------------------- Method: #pstree (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.pstree
+    \n------------------------------------------------------------------------\n\n
+    \   Show child process tree \n\n\n\n"
+! '#status':
+  :summary: Show current status.
+  :format: ! "-------------------------------- Method: #status (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/process.rb)\n\n    dynamic.status
+    \n------------------------------------------------------------------------\n\n
+    \   Show current status \n\n\n\n"
+! '#log_path':
+  :summary: Path to the log file.
+  :format: ! "------------------------------ Method: #log_path (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    dynamic.log_path
+    \n------------------------------------------------------------------------\n\n
+    \   Path to the log file \n\n\n\n"
+! '#log':
+  :summary: Open Logfile instance.
+  :format: ! "----------------------------------- Method: #log (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    dynamic.log
+    \n------------------------------------------------------------------------\n\n
+    \   Open Logfile instance \n\n\n\n"
+! '#has_log?':
+  :summary: True if we have an open log file.
+  :format: ! "------------------------------ Method: #has_log? (Resque::Pool::Dynamic)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    dynamic.has_log?
+    -> Boolean \n------------------------------------------------------------------------\n\n
+    \   True if we have an open log file \n\nReturns:\n--------\n\n    (Boolean) -
+    \n\n\n\n"
+Logfile#tail:
+  :summary: Show last n lines of the file, or follow the file.
+  :format: ! "------------------------- Method: #tail (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.tail(n
+    = nil, &block) \n------------------------------------------------------------------------\n\n
+    \   Show last n lines of the file, or follow the file \n\n\n\n"
+Logfile#tail_until:
+  :summary: Follow the file until a line matches regexp.
+  :format: ! "------------------- Method: #tail_until (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.tail_until(rx)
+    \n------------------------------------------------------------------------\n\n
+    \   Follow the file until a line matches regexp \n\n\n\n"
+Logfile#tail_to_eof:
+  :summary: Print contents of the file until current end of file.
+  :format: ! "------------------ Method: #tail_to_eof (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.tail_to_eof
+    \n------------------------------------------------------------------------\n\n
+    \   Print contents of the file until current end of file \n\n\n\n"
+Logfile#ff:
+  :summary: Fast forward until end of file.
+  :format: ! "--------------------------- Method: #ff (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.ff
+    \n------------------------------------------------------------------------\n\n
+    \   Fast forward until end of file \n\n\n\n"
+Logfile#rew:
+  :summary: Rewind until beginning of file.
+  :format: ! "-------------------------- Method: #rew (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.rew
+    \n------------------------------------------------------------------------\n\n
+    \   Rewind until beginning of file \n\n\n\n"
+Logfile#rewind:
+  :summary: Rewind until beginning of file.
+  :format: ! "----------------------- Method: #rewind (Resque::Pool::Dynamic::Logfile)\n
+    \                       (Defined in: lib/resque/pool/dynamic/logfile.rb)\n\n    logfile.rewind
+    \n------------------------------------------------------------------------\n\n
+    \   Rewind until beginning of file \n\n\n\n"

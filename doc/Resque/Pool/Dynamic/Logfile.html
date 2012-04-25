@@ -1,0 +1,722 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Resque::Pool::Dynamic::Logfile
+  
+    &mdash; Documentation by YARD 0.7.5
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../../_index.html">Index (L)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../../Resque.html" title="Resque (module)">Resque</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pool.html" title="Resque::Pool (class)">Pool</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Dynamic.html" title="Resque::Pool::Dynamic (class)">Dynamic</a></span></span>
+     &raquo; 
+    <span class="title">Logfile</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Resque::Pool::Dynamic::Logfile
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">IO::Tail::Logfile</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">IO::Tail::Logfile</li>
+          
+            <li class="next">Resque::Pool::Dynamic::Logfile</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/resque/pool/dynamic/logfile.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Slightly customized tailable file class
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pid-instance_method" title="#pid (instance method)">- (Integer, NilClass) <strong>pid</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+PID of process that writes the log file.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open-class_method" title="open (class method)">+ (void) <strong>open</strong>(filename, opts = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alive%3F-instance_method" title="#alive? (instance method)">- (Boolean) <strong>alive?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+True if child process is alive.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restat-instance_method" title="#restat (instance method)">- (void) <strong>restat</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Make sure to return on EOF if process is dead.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tail-instance_method" title="#tail (instance method)">- (void) <strong>tail</strong>(n = nil) {|ln| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Show last n lines of the file, or follow the file.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tail_to_eof-instance_method" title="#tail_to_eof (instance method)">- (void) <strong>tail_to_eof</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Print contents of the file until current end of file.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tail_until-instance_method" title="#tail_until (instance method)">- (void) <strong>tail_until</strong>(rx) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Follow the file until a line matches regexp.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="pid=-instance_method"></span>
+      <span id="pid-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="pid-instance_method">
+  
+    - (<tt>Integer</tt>, <tt>NilClass</tt>) <strong>pid</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+PID of process that writes the log file
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>NilClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pid'>pid</span>
+  <span class='ivar'>@pid</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="open-class_method">
+  
+    + (<tt>void</tt>) <strong>open</strong>(filename, opts = {}, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Need :pid</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span> <span class='symbol'>:pid</span>
+  <span class='kw'>super</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="alive?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>alive?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+True if child process is alive
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alive?'>alive?</span>
+  <span class='const'>Process</span><span class='period'>.</span><span class='id identifier rubyid_getpgid'>getpgid</span><span class='lparen'>(</span><span class='id identifier rubyid_pid'>pid</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="restat-instance_method">
+  
+    - (<tt>void</tt>) <strong>restat</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Make sure to return on EOF if process is dead
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_restat'>restat</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_return_if_eof'>return_if_eof</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_alive?'>alive?</span>
+  <span class='kw'>super</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="tail-instance_method">
+  
+    - (<tt>void</tt>) <strong>tail</strong>(n = nil) {|ln| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Show last n lines of the file, or follow the file
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>NilClass</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Number of lines or nil
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ln</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Called for every line of file
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>ln</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Input line
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tail'>tail</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ln'>ln</span><span class='op'>|</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ln'>ln</span>
+    <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_ln'>ln</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>end</span>
+<span class='kw'>rescue</span> <span class='const'>Interrupt</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="tail_to_eof-instance_method">
+  
+    - (<tt>void</tt>) <strong>tail_to_eof</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Print contents of the file until current end of file
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tail_to_eof'>tail_to_eof</span>
+  <span class='id identifier rubyid_orig_return_if_eof'>orig_return_if_eof</span><span class='comma'>,</span> <span class='id identifier rubyid_return_if_eof'>return_if_eof</span> <span class='op'>=</span> <span class='id identifier rubyid_return_if_eof'>return_if_eof</span><span class='comma'>,</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_tail'>tail</span>
+<span class='kw'>ensure</span>
+  <span class='id identifier rubyid_return_if_eof'>return_if_eof</span> <span class='op'>=</span> <span class='id identifier rubyid_orig_return_if_eof'>orig_return_if_eof</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="tail_until-instance_method">
+  
+    - (<tt>void</tt>) <strong>tail_until</strong>(rx) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Follow the file until a line matches regexp
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/resque/pool/dynamic/logfile.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tail_until'>tail_until</span><span class='lparen'>(</span><span class='id identifier rubyid_rx'>rx</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tail'>tail</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ln'>ln</span><span class='op'>|</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IO</span><span class='op'>::</span><span class='const'>Tail</span><span class='op'>::</span><span class='const'>ReturnException</span> <span class='kw'>if</span> <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=~</span> <span class='id identifier rubyid_rx'>rx</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Apr 25 21:03:03 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.5 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

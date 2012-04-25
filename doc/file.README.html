@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.7.5
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1 id="dynamic-resque-pool">Dynamic Resque Pool</h1>
+
+<p><a href="https://github.com/nevans/resque-pool">Resque pool</a> by Nicholas Evans
+is a library for managing a pool of
+<a href="http://github.com/defunkt/resque">resque</a> workers.  Given a a config
+file, it manages your workers for you, starting up the appropriate
+number of workers for each worker type.</p>
+
+<p>While the resque pool is convenient for a permanent process
+overlooking a fairly constant set of workers, it is less than
+convenient to use for more dynamic tasks - one-time long running batch
+processing worker families that need to be started and supervised
+manually, and often require adjusting number of worker processes for
+maximum performance.</p>
+
+<p>Workflow for this kind of task would be:</p>
+
+<ul>
+  <li>prepare a yaml file with number of workers</li>
+  <li>start resque-pool</li>
+  <li><code>tail -f</code> the log file on the other console</li>
+  <li>look into <code>pstree</code> (or <code>ps faxuw</code> on Linux)</li>
+  <li>babysit the process, check the system load whether number of workers
+needs to be adjusted</li>
+  <li>edit the yaml file</li>
+  <li><code>kill -HUP</code> the resque pool master (hope you remembered the PID from
+pstree!)</li>
+  <li>rinse, repeat</li>
+</ul>
+
+<p>Or you can add <code>gem "resque-pool-dynamic"</code> to your Gemfile, <code>require
+'resque/pool/dynamic/tasks'</code> to your Rakefile, and start an
+interactive CLI interface that controls the resque-pool-master.</p>
+
+<h2 id="example-resque-pool-manager-session">Example resque-pool-manager session</h2>
+
+<pre class="code ruby"><code>$ bundle exec rake resque:pool:dynamic WORKERS=foo=2:bar=2:\*=1           
+resque-pool-manager[21134]: started manager
+
+Status: running, pid: 21134
+Configuration:
+  bar: 2
+  &quot;*&quot;: 1
+  foo: 2
+Process tree:
+-+= 21134 japhy resque-pool-master: managing [21136, 21135, 21137, 21138, 21141]
+ |--- 21135 japhy resque-1.20.0: Waiting for bar
+ |--- 21136 japhy resque-1.20.0: Waiting for bar
+ |--- 21137 japhy resque-1.20.0: Waiting for *
+ |--- 21138 japhy resque-1.20.0: Waiting for foo
+ \--- 21141 japhy resque-1.20.0: Waiting for foo
+
+&gt;&gt; log.tail
+resque-pool-manager[21134]: Pool contains worker PIDs: [21136, 21135, 21137, 21138, 21141]
+resque-pool-worker[21135]: Starting worker portinari.local:21135:bar
+resque-pool-worker[21137]: Starting worker portinari.local:21137:*
+
+resque-pool-worker[21136]: Starting worker portinari.local:21136:bar
+resque-pool-worker[21141]: Starting worker portinari.local:21141:foo
+resque-pool-worker[21138]: Starting worker portinari.local:21138:foo
+</code></pre>
+
+<p>(log.tail is following the logfile like <code>tail -f</code> until you break with ^C)</p>
+
+<pre class="code ruby"><code>^C&gt;&gt; config :foo =&gt; 1, :bar =&gt; 4
+Reloading resque-pool-master 21134 configuration
+=&gt; {&quot;bar&quot;=&gt;4, &quot;*&quot;=&gt;1, &quot;foo&quot;=&gt;1}
+&gt;&gt; status
+
+Status: running, pid: 21134
+Configuration:
+  bar: 4
+  &quot;*&quot;: 1
+  foo: 1
+Process tree:
+-+= 21134 japhy resque-pool-master: managing [21176, 21178, 21162, 21163, 21180, 21181]
+ |--- 21162 japhy resque-1.20.0: Waiting for bar
+ |--- 21163 japhy resque-1.20.0: Waiting for bar
+ |--- 21176 japhy resque-1.20.0: Waiting for bar
+ |--- 21178 japhy resque-1.20.0: Waiting for bar
+ |--- 21180 japhy resque-1.20.0: Waiting for *
+ \--- 21181 japhy resque-1.20.0: Waiting for foo
+
+&gt;&gt; log.tail
+resque-pool-manager[21134]: HUP: reload config file and reload logfiles
+resque-pool-manager[21134]: Flushing logs
+resque-pool-manager[21134]: HUP: gracefully shutdown old children (which have old logfiles open)
+resque-pool-manager[21134]: HUP: new children will inherit new logfiles
+resque-pool-worker[21163]: Starting worker portinari.local:21163:bar
+resque-pool-worker[21162]: Starting worker portinari.local:21162:bar
+resque-pool-manager[21134]: Reaped resque worker[21136] (status: 0) queues: bar
+resque-pool-manager[21134]: Reaped resque worker[21135] (status: 0) queues: bar
+resque-pool-worker[21176]: Starting worker portinari.local:21176:bar
+resque-pool-worker[21178]: Starting worker portinari.local:21178:bar
+resque-pool-manager[21134]: Reaped resque worker[21141] (status: 0) queues: foo
+resque-pool-manager[21134]: Reaped resque worker[21138] (status: 0) queues: foo
+resque-pool-worker[21180]: Starting worker portinari.local:21180:*
+resque-pool-worker[21181]: Starting worker portinari.local:21181:foo
+^C&gt;&gt; exit
+Bye!
+Shutting down resque-pool-master 21134
+resque-pool-manager[21134]: INT: immediate shutdown (graceful worker shutdown)
+resque-pool-manager[21134]: manager finished
+$ _
+</code></pre>
+
+<h2 id="command-line-interface">Command Line Interface</h2>
+
+<p>The CLI is a slightly customized Ripl shell (an IRB replacement)
+started in context of a <code>Resque::Pool::Dynamic</code> instance. You can use
+all Ruby you want, and call all the methods for controlling the resque
+pool. A simple built-in help for the custom methods is included:</p>
+
+<pre class="code ruby"><code>&gt;&gt; help
+Known commands:
+  config - &quot;WORKERS&quot;, as interpreted by the #parse_config_string method.
+  config_path - Path to the temporary config file.
+  exit - Finish work
+  has_log? - True if we have an open log file.
+  kill! - Send signal to a running resque-pool.
+  log - Open log of resque-pool process.
+  log.ff - Fast forward until end of file (see IO::Tail#backward).
+  log.rew - Rewind until beginning of file (see IO::Tail#forward).
+  log.rewind - Rewind until beginning of file (see IO::Tail#forward).
+  log.tail - Show last n lines of the file, or follow the file.
+  log.tail_to_eof - Print contents of the file until current end of file.
+  log.tail_until - Follow the file until a line matches regexp.
+  log_path - Logfile path.
+  pid - PID of the resque-pool process, or nil if it's not running.
+  pstree - Show child process tree by calling `pstree` system command.
+  reload - Reload resque-pool configuration.
+  start - Start resque-pool, showing startup logs.
+  start! - Fork a child process for resque-pool master.
+  status - Show current status.
+  stop - Stop running resque-pool, show shutdown logs.
+  stop! - Stop running resque-pool.
+  write_config - Write temporary configuration file.
+For details, type: help command
+&gt;&gt; help config
+-------------------------------- Method: #config (Resque::Pool::Dynamic)
+                        (Defined in: lib/resque/pool/dynamic/process.rb)
+    dynamic.config -&gt; Hash 
+    dynamic.config(opts) -&gt; Hash 
+------------------------------------------------------------------------
+    Note: Default configuration is taken from environment variable
+    &quot;WORKERS&quot;, as interpreted by the #parse_config_string method.
+Examples:
+---------
+    # config
+    #=&gt; {&quot;foo&quot;=&gt;1, &quot;bar&quot;=&gt;2}
+    config :foo =&gt; 2, :baz =&gt; 7
+    #=&gt; {&quot;foo&quot;=&gt;2, &quot;baz&quot;=&gt;7, &quot;bar&quot;=&gt;2}
+    config :bar =&gt; 0
+    #=&gt; {&quot;foo&quot;=&gt;2, &quot;baz&quot;=&gt;7}
+Overloads:
+----------
+------------------------------------------------------------------------
+    dynamic.config -&gt; Hash 
+------------------------------------------------------------------------
+        Show current workers configuration 
+    Returns:
+    --------
+        (Hash) - 
+------------------------------------------------------------------------
+    dynamic.config(opts) -&gt; Hash 
+------------------------------------------------------------------------
+        Update workers configuration. If configuration has change and
+        resque-pool is running, it is reloaded. 
+    Parameters:
+    -----------
+        (Hash) opts - Dictionary of worker process counts to update
+        (pass 0 or nil as value to delete all workers for a queue from pool)
+    Returns:
+    --------
+        (Hash) - Updated config
+&gt;&gt; _
+</code></pre>
+
+<p>The built-in help is autogenerated from Yard documentation on methods;
+if you’re curious, look into the Rakefile for details.</p>
+
+<h2 id="rake-task-documentation">Rake task documentation</h2>
+
+<pre class="code ruby"><code>$ bundle exec rake -D resque:pool:dynamic
+rake resque:pool:dynamic
+    Starts a dynamic pool of Resque worker processes.
+    
+    Variables:
+    WORKERS=worker spec - specify initial numbers of workers
+                          (look below for format description)
+    NO_START=1 - don't start resque-pool master automatically
+                 (default is to start)
+    
+    Workers spec format:
+    queue_name=process_number[:queue_name=process_number[:...]]
+    
+    queue_name can be whatever resque:work will accept as QUEUE=
+    parameter.
+    
+    Example:
+    $ rake resque:pool:dynamic WORKERS=foo=1:bar=1:baz,quux,xyzzy=5:*=2
+    will start:
+     - one worker for queue 'foo'
+     - one worker for queue 'bar'
+     - five workers for queues baz,quux,xyzzy
+     - two workers for all queues
+</code></pre>
+
+<h2 id="api-and-code-structure">API and code structure</h2>
+
+<p>The Rake task, defined in <code>resque/pool/dynamic/tasks.rb</code>, is a
+one-liner calling out to <code>Resque::Pool::Dynamic.shell</code>, which starts
+the command line interface.</p>
+
+<p>The CLI itself, defined in <code>resque/pool/dynamic/shell.rb</code>, is a thin
+layer (8 lines of code + Ripl UI tweaks) over an instance of the
+<code>Resque::Pool::Dynamic</code> class.</p>
+
+<p>The workhorse <code>Resque::Pool::Dynamic</code> class is defined in
+<code>resque/pool/dynamic.rb</code>. It can be easily instantiated in the code
+independent from the CLI; the CLI commands are just instance methods
+you can call then.</p>
+
+<h3 id="ideas">Ideas</h3>
+
+<p>Besides interactive, supervised work, <code>Resque::Pool::Dynamic</code> can be
+used separately from the UI for dynamic, reactive management of
+workers, implementing some kind of autoscaling and load distribution
+logic.</p>
+
+<p>It can be used during load tests to automatically optimize best number
+of workers for maximum processing speed, while keeping load average
+and memory or CPU usage goals.</p>
+
+<p>It may also react to queue depths, e.g. temporarily reallocating idle
+workers to overloaded queues or shutting them down to conserve memory,
+or actively managing sudden short peak usage by stopping other workers
+and switching them to peaking queue.</p>
+
+<p>It may also simply allocate workers dynamically based on time of day,
+to e.g. have more workers performing UI-related task in the day, which
+increases perceived responsiveness, and switch them to process
+long-running reports overnight when there are less users.</p>
+
+<h2 id="detailed-documentation-and-source-code">Detailed documentation and source code</h2>
+
+<ul>
+  <li>http://rubydoc.info/FIXME</li>
+  <li>http://github.com/mpasternacki/resque-pool-dynamic</li>
+</ul>
+</div></div>
+    
+    <div id="footer">
+  Generated on Wed Apr 25 21:03:02 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.5 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
