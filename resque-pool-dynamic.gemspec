@@ -14,6 +14,7 @@ A class to dynamically manage number of processes and status in the
 resque pool with a command-line user interface to interacively manage
 and supervise the worker pool.
 EOF
+  s.licenses = ['BSD']
 
   s.rubyforge_project = "resque-pool-dynamic"
 
