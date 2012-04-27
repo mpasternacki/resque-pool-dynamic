@@ -24,6 +24,7 @@ EOF
   s.require_paths = ["lib"]
 
   s.add_development_dependency "yard"
+  s.add_runtime_dependency "resque-pool"
   s.add_runtime_dependency "io-tail"
   s.add_runtime_dependency "rake"
   s.add_runtime_dependency "ripl"
