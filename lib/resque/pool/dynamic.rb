@@ -204,7 +204,7 @@ module Resque
         puts( '',
           "Status: " << ( pid ? "running, pid: #{pid}" : "not running" ),
           "Configuration:",
-          YAML::dump(config).grep(/^(?!---\s*$)/).map { |v| "  " << v }
+          YAML::dump(config).lines.grep(/^(?!---\s*$)/).map { |v| "  " << v }
           )
         if pid
           puts "Process tree:"
