@@ -8,7 +8,7 @@ end
 
 # Precompute JSON file with help
 
-file 'lib/resque/pool/help.json' => Dir['lib/**/*.rb'] do
+file 'lib/resque/pool/dynamic/help.json' => Dir['lib/**/*.rb'] do
   require 'yard'
   require 'json'
 
@@ -27,13 +27,13 @@ file 'lib/resque/pool/help.json' => Dir['lib/**/*.rb'] do
   docs.update(
     :exit => { :summary => 'Finish work', :full => 'Finish work (AKA quit)' })
 
-  File.open('lib/resque/pool/help.json', 'w') do |f|
+  File.open('lib/resque/pool/dynamic/help.json', 'w') do |f|
     f.write(JSON::dump(docs))
   end
 end
 
 desc "Generate online help for the CLI"
-task :gen_help => 'lib/resque/pool/help.json'
+task :gen_help => 'lib/resque/pool/dynamic/help.json'
 
 task :default => [ :gen_help, :yard ]
 
